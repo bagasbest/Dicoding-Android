@@ -77,4 +77,74 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_marginBottom="16dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/repeating_alarm"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_repeating_time"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_repeat_black_24dp"
+            android:contentDescription="@string/image" />
+
+        <TextView
+            android:id="@+id/tv_repeating_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm_time" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_repeating_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/alarm_message"
+        android:layout_marginBottom="16dp"
+        android:inputType="text"
+        android:autofillHints="no" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginEnd="5dp"
+            android:text="@string/cancel_alarm"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPink"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btn_set_repeating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginStart="5dp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorGreen"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="@string/set_repeating_alarm"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+
+
 </LinearLayout>
