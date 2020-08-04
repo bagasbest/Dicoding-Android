@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">My Github</string>
+    <string name="silahkan_tunggu">Silahkan tunggu</string>
+    <string name="nama_pengguna">Nama pengguna</string>
+    <string name="id_pengguna">ID pengguna</string>
+    <string name="user_organization">User organization</string>
+    <string name="cari_user">Cari user</string>
+    <string name="searc_hint">cari pengguna</string>
 </resources>
