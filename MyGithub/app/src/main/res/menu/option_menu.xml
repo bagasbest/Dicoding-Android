@@ -7,6 +7,12 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/cari_user"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="collapseActionView|always" />
+        app:showAsAction="collapseActionView|ifRoom" />
+
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/about_us"
+        app:showAsAction="ifRoom" />
 
 </menu>

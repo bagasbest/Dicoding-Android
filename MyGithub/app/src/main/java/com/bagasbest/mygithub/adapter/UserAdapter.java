@@ -1,5 +1,8 @@
 package com.bagasbest.mygithub.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bagasbest.mygithub.R;
+import com.bagasbest.mygithub.activity.DetailActivity;
+import com.bagasbest.mygithub.fragment.FollowingFragment;
 import com.bagasbest.mygithub.model.User;
+import com.bagasbest.mygithub.viewmodel.FollowingViewModel;
 import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
@@ -19,7 +25,12 @@ import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
 
+//    Context context;
     private ArrayList<User> userList = new ArrayList<>();
+
+
+
+
 
     public void setData(ArrayList<User> users) {
         userList.clear();
@@ -35,7 +46,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserAdapter.UserViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final UserAdapter.UserViewHolder holder, final int position) {
         holder.bind(userList.get(position));
 
         String userIv = userList.get(position).getImage();
@@ -47,6 +58,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             e.getMessage();
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                passingValueToDetailActivity(holder, position);
+            }
+        });
+
+    }
+
+
+    private void passingValueToDetailActivity(UserAdapter.UserViewHolder holder, int position) {
+        Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_NAME, userList.get(position).getName());
+        intent.putExtra(DetailActivity.EXTRA_ID, userList.get(position).getId());
+        intent.putExtra(DetailActivity.EXTRA_IMAGE, userList.get(position).getImage());
+
+        holder.itemView.getContext().startActivity(intent);
     }
 
     @Override

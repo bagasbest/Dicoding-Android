@@ -6,4 +6,24 @@
     <string name="user_organization">User organization</string>
     <string name="cari_user">Cari user</string>
     <string name="searc_hint">cari pengguna</string>
+    <string name="bagas_pangestu">Bagas Pangestu</string>
+    <string name="seorang_mahasiswa_informatika_yang_tertarik_dengan_coding_yang_memiliki_cita_cita_untuk_membuat_start_up_di_bidang_teknologi">Seorang mahasiswa informatika yang tertarik dengan coding, yang memiliki cita - cita untuk membuat start-up di bidang teknologi.</string>
+    <string name="email">bagasbest80@gmail.com</string>
+    <string name="kontak">Kontak saya:</string>
+    <string name="media_sosial_saya">Media sosial saya:</string>
+    <string name="image">image</string>
+    <string name="myquote">MyQuote:</string>
+    <string name="jangan_pernah_berhenti_untuk_belajar">Jangan pernah berhenti untuk belajar</string>
+    <string name="about_us">About us</string>
+    <string name="username">Username</string>
+    <string name="repo">Public Repository : 0</string>
+    <string name="your_bio">Your bio</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_text_1">Following</string>
+    <string name="tab_text_2">Follower</string>
+    <string name="belum_mengisi">Belum mengisi</string>
+    <string name="belum_memiliki">Belum memiliki repositori</string>
+    <string name="empty_value">Maaf, data pencarian kosong! \n silahkan isi kolom pencarian dengan benar</string>
 </resources>
