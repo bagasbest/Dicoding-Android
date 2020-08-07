@@ -97,7 +97,7 @@ public class DetailActivity extends AppCompatActivity {
         final String url = "https://api.github.com/users/" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token c9cab51a42a36bdde81b50ab26a7cf4bea1b1342");
+        client.addHeader("Authorization", "token 6af8f71d60bccb253ed4d7a1c310df838d063d97");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

@@ -71,7 +71,7 @@ public class FollowerFragment extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
 
         progressDialog();
-        followingViewModel.setFollower();
+        followingViewModel.setFollower(getActivity());
 
         followingViewModel.getUserFollowerList().observe(getActivity(), new Observer<ArrayList<UserFollower>>() {
             @Override

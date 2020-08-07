@@ -1,6 +1,8 @@
 package com.bagasbest.mygithub.viewmodel;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,14 +25,14 @@ public class FollowingViewModel extends ViewModel {
         private MutableLiveData<ArrayList<UserFollowing>> listFollowing = new MutableLiveData<>();
 
 
-        public void setFollowing () {
+        public void setFollowing (final Context context) {
 
             final ArrayList <UserFollowing> listUserFollowing = new ArrayList<>();
 
             final String url = "https://api.github.com/users/bagasbest/following";
 
             AsyncHttpClient client = new AsyncHttpClient();
-            client.addHeader("Authorization", "token c9cab51a42a36bdde81b50ab26a7cf4bea1b1342");
+            client.addHeader("Authorization", "token 6af8f71d60bccb253ed4d7a1c310df838d063d97");
             client.addHeader("User-Agent", "request");
             client.get(url, new AsyncHttpResponseHandler() {
                 @Override
@@ -57,6 +59,7 @@ public class FollowingViewModel extends ViewModel {
 
                     }catch (Exception e) {
                         Log.d("Exception: ", e.getMessage());
+                        Toast.makeText(context, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -64,6 +67,7 @@ public class FollowingViewModel extends ViewModel {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                     Log.d("onFailure: ", error.getMessage());
+                    Toast.makeText(context, "onFailure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 

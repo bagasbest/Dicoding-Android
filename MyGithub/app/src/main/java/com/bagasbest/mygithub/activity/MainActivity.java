@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     if(!TextUtils.isEmpty(query.trim())) {
                         //searchView tidak kosong
                         progressDialog();
-                        mainViewModel.setUserList(query);
+                        mainViewModel.setUserList(query,MainActivity.this);
                     }
                     return false;
                 }

@@ -2,13 +2,17 @@ package com.bagasbest.mygithub.viewmodel;
 
 
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.bagasbest.mygithub.activity.MainActivity;
 import com.bagasbest.mygithub.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -27,7 +31,7 @@ public class MainViewModel extends ViewModel {
     private static final String TAG = MainViewModel.class.getSimpleName();
 
 
-    public void setUserList(String username) {
+    public void setUserList(String username, final Context context) {
 
         //request API
         final ArrayList<User> userArrayList = new ArrayList<>();
@@ -35,7 +39,7 @@ public class MainViewModel extends ViewModel {
         final String url = "https://api.github.com/search/users?q=" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token c9cab51a42a36bdde81b50ab26a7cf4bea1b1342");
+        client.addHeader("Authorization", "token 6af8f71d60bccb253ed4d7a1c310df838d063d97");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -62,7 +66,7 @@ public class MainViewModel extends ViewModel {
                     listUser.postValue(userArrayList);
 
                 } catch (JSONException e) {
-                    //Toast.makeText(context, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.d("Exception: ", e.getMessage());
                 }
 
@@ -71,7 +75,7 @@ public class MainViewModel extends ViewModel {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                //Toast.makeText(context, "Exception: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "onFailure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("onFailure: ", error.getMessage());
             }
         });
