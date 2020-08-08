@@ -2,6 +2,11 @@ package com.bagasbest.mygithub.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,19 +16,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.bagasbest.mygithub.R;
 import com.bagasbest.mygithub.adapter.FollowerAdapter;
-import com.bagasbest.mygithub.adapter.FollowingAdapter;
 import com.bagasbest.mygithub.model.UserFollower;
-import com.bagasbest.mygithub.model.UserFollowing;
 import com.bagasbest.mygithub.viewmodel.FollowerViewModel;
-import com.bagasbest.mygithub.viewmodel.FollowingViewModel;
 
 import java.util.ArrayList;
 
@@ -32,16 +28,25 @@ import java.util.ArrayList;
  */
 public class FollowerFragment extends Fragment {
 
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
-    FollowerAdapter followerAdapter;
-    RecyclerView recyclerView;
-    FollowerViewModel followingViewModel;
+    private FollowerAdapter followerAdapter;
+    private RecyclerView recyclerView;
+    private FollowerViewModel followingViewModel;
+
+    private static final String ARG_NAME = "name";
 
     public FollowerFragment() {
         // Required empty public constructor
     }
 
+    public static FollowerFragment newInstance (String name) {
+        FollowerFragment fragment = new FollowerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_NAME, name);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,12 +71,12 @@ public class FollowerFragment extends Fragment {
         followerAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(followerAdapter);
 
-//        String username = getArguments().getString(ARG_NAME);
+        String username = getArguments().getString(ARG_NAME);
 
         progressDialog = new ProgressDialog(getActivity());
 
         progressDialog();
-        followingViewModel.setFollower(getActivity());
+        followingViewModel.setFollower(getActivity(), username);
 
         followingViewModel.getUserFollowerList().observe(getActivity(), new Observer<ArrayList<UserFollower>>() {
             @Override

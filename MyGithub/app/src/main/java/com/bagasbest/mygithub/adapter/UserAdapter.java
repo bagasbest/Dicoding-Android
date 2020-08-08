@@ -1,8 +1,6 @@
 package com.bagasbest.mygithub.adapter;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bagasbest.mygithub.R;
 import com.bagasbest.mygithub.activity.DetailActivity;
-import com.bagasbest.mygithub.fragment.FollowingFragment;
 import com.bagasbest.mygithub.model.User;
-import com.bagasbest.mygithub.viewmodel.FollowingViewModel;
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -82,7 +76,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return userList.size();
     }
 
-    class UserViewHolder extends RecyclerView.ViewHolder {
+    static class UserViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNama, tvId, tvOrganization;
         ImageView imgProfil;

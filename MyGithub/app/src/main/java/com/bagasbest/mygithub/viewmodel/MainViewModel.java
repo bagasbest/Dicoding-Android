@@ -1,18 +1,14 @@
 package com.bagasbest.mygithub.viewmodel;
 
 
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
-
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.bagasbest.mygithub.activity.MainActivity;
 import com.bagasbest.mygithub.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -39,7 +35,7 @@ public class MainViewModel extends ViewModel {
         final String url = "https://api.github.com/search/users?q=" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token 6af8f71d60bccb253ed4d7a1c310df838d063d97");
+        client.addHeader("Authorization", "token 2136e1a95f0ac825da57c8ef353019cdf2482f5e");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

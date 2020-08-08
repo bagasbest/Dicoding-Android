@@ -15,4 +15,10 @@
         android:title="@string/about_us"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_change_settings"
+        android:title="@string/ubah_pengaturan_bahasa"
+        app:showAsAction="never"/>
+
+
 </menu>

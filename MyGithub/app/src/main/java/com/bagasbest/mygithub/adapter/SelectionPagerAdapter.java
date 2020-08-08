@@ -1,7 +1,6 @@
 package com.bagasbest.mygithub.adapter;
 
 import android.content.Context;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +16,12 @@ import com.bagasbest.mygithub.fragment.FollowingFragment;
 public class SelectionPagerAdapter extends FragmentPagerAdapter {
 
     private final Context mContext;
-//    public String name;
+    public String name;
 
-    public SelectionPagerAdapter(@NonNull FragmentManager fm, Context mContext) {
+    public SelectionPagerAdapter(@NonNull FragmentManager fm, Context mContext, String name) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.mContext = mContext;
-//        this.name = name;
+        this.name = name;
     }
 
     @StringRes
@@ -31,6 +30,8 @@ public class SelectionPagerAdapter extends FragmentPagerAdapter {
             R.string.tab_text_2
     };
 
+
+
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -38,11 +39,11 @@ public class SelectionPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0 :
-                fragment = new FollowingFragment();
+                fragment = FollowingFragment.newInstance(name);
                 break;
 
             case 1 :
-                fragment = new FollowerFragment();
+                fragment = FollowerFragment.newInstance(name);
                 break;
         }
 

@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bagasbest.mygithub.R;
-import com.bagasbest.mygithub.model.User;
 import com.bagasbest.mygithub.model.UserFollowing;
 import com.bumptech.glide.Glide;
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Github</string>
+    <string name="silahkan_tunggu">Now Loading</string>
+    <string name="nama_pengguna">User name</string>
+    <string name="id_pengguna">User ID</string>
+    <string name="user_organization">User organization</string>
+    <string name="cari_user">User search</string>
+    <string name="searc_hint">Search user</string>
+    <string name="bagas_pangestu">Bagas Pangestu</string>
+    <string name="keterangan">An informatics student who is interested in coding, who has an aspiration to create a start-up in the technology field.</string>
+    <string name="email">bagasbest80@gmail.com</string>
+    <string name="kontak">My contact:</string>
+    <string name="media_sosial_saya">My social media:</string>
+    <string name="image">image</string>
+    <string name="myquote">My Quote:</string>
+    <string name="jangan_pernah_berhenti_untuk_belajar">Do not ever stop to learn</string>
+    <string name="about_us">About us</string>
+    <string name="username">Username</string>
+    <string name="repo">Public Repository : 0</string>
+    <string name="your_bio">Your bio</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="tab_text_1">Following</string>
+    <string name="tab_text_2">Follower</string>
+    <string name="belum_mengisi">Not filled yet</string>
+    <string name="belum_memiliki">Have not repository yet</string>
+    <string name="empty_value">Sorry, the search data is empty! \n please fill in the search field correctly</string>
+    <string name="ubah_pengaturan_bahasa">Change language setting</string>
+</resources>

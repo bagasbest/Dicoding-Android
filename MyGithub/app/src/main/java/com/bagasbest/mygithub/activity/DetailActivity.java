@@ -1,8 +1,5 @@
 package com.bagasbest.mygithub.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -11,9 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.bagasbest.mygithub.R;
 import com.bagasbest.mygithub.adapter.SelectionPagerAdapter;
-import com.bagasbest.mygithub.model.User;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.loopj.android.http.AsyncHttpClient;
@@ -57,8 +56,8 @@ public class DetailActivity extends AppCompatActivity {
         setUserDetail();
 
 
-        SelectionPagerAdapter selectionPagerAdapter = new SelectionPagerAdapter(getSupportFragmentManager(), this);
-       // selectionPagerAdapter.name = username;
+        SelectionPagerAdapter selectionPagerAdapter = new SelectionPagerAdapter(getSupportFragmentManager(), this, username);
+        selectionPagerAdapter.name = username;
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(selectionPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -97,7 +96,7 @@ public class DetailActivity extends AppCompatActivity {
         final String url = "https://api.github.com/users/" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token 6af8f71d60bccb253ed4d7a1c310df838d063d97");
+        client.addHeader("Authorization", "token 2136e1a95f0ac825da57c8ef353019cdf2482f5e");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

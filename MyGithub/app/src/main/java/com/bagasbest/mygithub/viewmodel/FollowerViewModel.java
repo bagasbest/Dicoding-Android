@@ -7,15 +7,16 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.bagasbest.mygithub.model.UserFollower;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 public class FollowerViewModel extends ViewModel {
@@ -23,14 +24,14 @@ public class FollowerViewModel extends ViewModel {
     private MutableLiveData<ArrayList<UserFollower>> listFollower = new MutableLiveData<>();
 
 
-    public void setFollower (final Context context) {
+    public void setFollower(final Context context, String username) {
 
         final ArrayList <UserFollower> listUserFollower = new ArrayList<>();
 
-        final String url = "https://api.github.com/users/bagasbest/followers";
+        final String url = "https://api.github.com/users/"+ username +"/followers";
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token 6af8f71d60bccb253ed4d7a1c310df838d063d97");
+        client.addHeader("Authorization", "token 2136e1a95f0ac825da57c8ef353019cdf2482f5e");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
