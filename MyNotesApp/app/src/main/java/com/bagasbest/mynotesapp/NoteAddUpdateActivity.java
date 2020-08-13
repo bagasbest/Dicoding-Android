@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -19,11 +21,14 @@ import android.widget.Toast;
 import com.bagasbest.mynotesapp.db.DatabaseContract;
 import com.bagasbest.mynotesapp.db.NoteHelper;
 import com.bagasbest.mynotesapp.entity.Note;
+import com.bagasbest.mynotesapp.helper.MappingHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.bagasbest.mynotesapp.db.DatabaseContract.NoteColumns.CONTENT_URI;
 
 public class NoteAddUpdateActivity extends AppCompatActivity
                 implements View.OnClickListener{
@@ -35,6 +40,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity
     private Note note;
     private int position;
     private NoteHelper noteHelper;
+    private Uri uriWithId;
 
     public static final String EXTRA_NOTE = "extra_note";
     public static final String EXTRA_POSITION = "extra_position";
@@ -72,6 +78,24 @@ public class NoteAddUpdateActivity extends AppCompatActivity
         String btnTitle;
 
         if (isEdit) {
+            //Uri yang di dapatkan disini akan digunakan untuk ambil data dari provider
+            //content://com.bagasbest.mynotesapp/note/id
+            uriWithId = Uri.parse(CONTENT_URI + "/" + note.getId());
+            if(uriWithId != null) {
+                Cursor cursor = getContentResolver().query(
+                        uriWithId,
+                        null,
+                        null,
+                        null,
+                        null
+                );
+
+                if(cursor != null) {
+                    note = MappingHelper.mapCursorToObject(cursor);
+                    cursor.close();
+                }
+            }
+
             actionBarTitle = "Ubah";
             btnTitle = "Perbarui";
 
@@ -79,6 +103,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity
                 etTitle.setText(note.getTitle());
                 etDescription.setText(note.getDescription());
             }
+
         } else {
             actionBarTitle = "Tambah";
             btnTitle  = "Simpan";
@@ -117,29 +142,41 @@ public class NoteAddUpdateActivity extends AppCompatActivity
             values.put(DatabaseContract.NoteColumns.DESCRIPTION, desc);
 
             if (isEdit) {
-                long result = noteHelper.update(String.valueOf(note.getId()), values);
-                if (result > 0) {
-                    setResult(RESULT_UPDATE, intent);
-                    finish();
-                } else {
-                    Toast.makeText(NoteAddUpdateActivity.this, "Gagal mengupdate data", Toast.LENGTH_SHORT).show();
-                }
+                //Gunakan uriWithId untuk update
+                //content://com.bagasbest.mynotesapp/note/id
+                getContentResolver().update(uriWithId, values, null, null);
+
+                Toast.makeText(NoteAddUpdateActivity.this, "Satu item berhasil di perbarui...", Toast.LENGTH_SHORT).show();
+                finish();
+
+//                long result = noteHelper.update(String.valueOf(note.getId()), values);
+//                if (result > 0) {
+//                    setResult(RESULT_UPDATE, intent);
+//                    finish();
+//                } else {
+//                    Toast.makeText(NoteAddUpdateActivity.this, "Gagal mengupdate data", Toast.LENGTH_SHORT).show();
+//                }
             } else {
                 note.setDate(getCurrentDate());
                 values.put(DatabaseContract.NoteColumns.DATE, getCurrentDate());
-                long result = noteHelper.insert(values);
 
-                if(result > 0) {
-                    note.setId((int) result);
-                    setResult(RESULT_ADD, intent);
-                    finish();
-                } else {
-                    Toast.makeText(NoteAddUpdateActivity.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
+                //Gunakan content uri untuk insert
+                //content://com.bagasbest.mynotesapp/note/
+                getContentResolver().insert(CONTENT_URI, values);
+                Toast.makeText(NoteAddUpdateActivity.this, "Satu item berhasil ditambahkan...", Toast.LENGTH_SHORT).show();
+                finish();
 
-                }
+//                long result = noteHelper.insert(values);
+//
+//                if(result > 0) {
+//                    note.setId((int) result);
+//                    setResult(RESULT_ADD, intent);
+//                    finish();
+//                } else {
+//                    Toast.makeText(NoteAddUpdateActivity.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
+//
+//                }
             }
-
-
         }
     }
 
@@ -200,15 +237,26 @@ public class NoteAddUpdateActivity extends AppCompatActivity
                         if(isDialogClose) {
                             finish();
                         } else {
-                            long  result = noteHelper.deleteById(String.valueOf(note.getId()));
-                            if(result > 0) {
-                                Intent intent = new Intent();
-                                intent.putExtra(EXTRA_POSITION, position);
-                                setResult(RESULT_DELETE, intent);
-                                finish();
-                            } else {
-                                Toast.makeText(NoteAddUpdateActivity.this, "Gagal menghapus data", Toast.LENGTH_SHORT).show();
-                            }
+                            //Gunakan uriWithId untuk delete
+                            //content://com.bagasbest.mynotesapp/note/id
+                            getContentResolver().delete(
+                                    uriWithId,
+                                    null,
+                                    null
+                            );
+
+                            Toast.makeText(NoteAddUpdateActivity.this, "Satu item berhasil dihapus...", Toast.LENGTH_SHORT).show();
+                            finish();
+
+//                            long  result = noteHelper.deleteById(String.valueOf(note.getId()));
+//                            if(result > 0) {
+//                                Intent intent = new Intent();
+//                                intent.putExtra(EXTRA_POSITION, position);
+//                                setResult(RESULT_DELETE, intent);
+//                                finish();
+//                            } else {
+//                                Toast.makeText(NoteAddUpdateActivity.this, "Gagal menghapus data", Toast.LENGTH_SHORT).show();
+//                            }
                         }
                     }
                 })
