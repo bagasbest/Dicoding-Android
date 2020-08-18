@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/acctivity_reply"
+    android:background="@color/background"
+    android:paddingStart="16dp"
+    android:paddingTop="45dp"
+    android:paddingEnd="16dp"
+    android:gravity="center"
+    android:paddingBottom="45dp"
+    tools:context=".ReplyActivity">
+
+    <EditText
+        android:id="@+id/et_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:hint="@string/hint_reply"
+        android:layout_toStartOf="@id/button_send"/>
+
+    <ImageButton
+        android:id="@+id/button_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:src="@drawable/ic_baseline_send_24" />
+
+
+</RelativeLayout>
