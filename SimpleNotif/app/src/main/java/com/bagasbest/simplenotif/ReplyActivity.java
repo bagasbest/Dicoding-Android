@@ -16,12 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import static com.bagasbest.simplenotif.NotificationService.CHANNEL_ID;
+import static com.bagasbest.simplenotif.NotificationService.CHANNEL_NAME;
+import static com.bagasbest.simplenotif.NotificationService.REPLY_ACTION;
+
 public class ReplyActivity extends AppCompatActivity {
 
     private static final String KEY_MESSAGE_ID = "key_message_id";
     private static final String KEY_NOTIFY_ID = "key_notify_id";
-    private static final String CHANNEL_ID = "channel_01";
-    private static final CharSequence CHANNEL_NAME = "bagas channel";
 
 
     private int mMessageId;
@@ -29,7 +31,7 @@ public class ReplyActivity extends AppCompatActivity {
 
     private EditText etReply;
 
-    private static Intent getReplyMessageIntent (Context context, int mNotifyId, int mMessageId) {
+    public static Intent getReplyMessageIntent(Context context, int mNotifyId, int mMessageId) {
         Intent intent = new Intent(context, ReplyActivity.class);
         intent.setAction(REPLY_ACTION);
         intent.putExtra(KEY_MESSAGE_ID, mMessageId);
@@ -63,8 +65,8 @@ public class ReplyActivity extends AppCompatActivity {
     private void sendMessage(int mNotifyId, int mMessageId) {
         updateNotification(mNotifyId);
 
-        String mesage = etReply.getText().toString().trim();
-        Toast.makeText(this, "Message ID: " + mMessageId + "\nMessage: " + mesage, Toast.LENGTH_SHORT).show();
+        String message = etReply.getText().toString().trim();
+        Toast.makeText(this, "Message ID: " + mMessageId + "\nMessage: " + message, Toast.LENGTH_SHORT).show();
 
         finish();
     }

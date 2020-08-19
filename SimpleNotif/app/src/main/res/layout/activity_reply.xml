@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/acctivity_reply"
+    android:id="@+id/activity_reply"
     android:background="@color/background"
     android:paddingStart="16dp"
     android:paddingTop="45dp"
@@ -19,7 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:hint="@string/hint_reply"
-        android:layout_toStartOf="@id/button_send"/>
+        android:layout_toStartOf="@id/button_send"
+        android:autofillHints="no"
+        android:inputType="text" />
 
     <ImageButton
         android:id="@+id/button_send"
@@ -31,7 +33,8 @@
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
-        android:src="@drawable/ic_baseline_send_24" />
+        android:src="@drawable/ic_baseline_send_24"
+        android:contentDescription="@string/image" />
 
 
 </RelativeLayout>

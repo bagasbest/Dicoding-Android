@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="35dp"
+    android:paddingEnd="35dp"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnSendNotof"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/kirim_notifikasi"
         android:layout_centerInParent="true"
@@ -19,7 +21,7 @@
 
     <Button
         android:id="@+id/button_show_notification"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_show_notif"
         android:layout_below="@+id/btnSendNotof"
@@ -27,5 +29,17 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="#FFC107"
         android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/stack_notif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stack_notif"
+        android:backgroundTint="#9C27B0"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:onClick="stackNotif"
+        android:layout_below="@+id/button_show_notification"
+        tools:ignore="OnClick" />
 
 </RelativeLayout>
