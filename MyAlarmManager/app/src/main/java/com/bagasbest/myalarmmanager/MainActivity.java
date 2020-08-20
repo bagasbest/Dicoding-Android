@@ -80,17 +80,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_repeating_time :
-                TimePickerFragment timePickerFragment1 = new TimePickerFragment();
-                timePickerFragment1.show(getSupportFragmentManager(),TIME_PICKER_REPEAT_TAG);
+                TimePickerFragment timePickerFragmentRepeat = new TimePickerFragment();
+                timePickerFragmentRepeat.show(getSupportFragmentManager(), TIME_PICKER_REPEAT_TAG);
                 break;
             case R.id.btn_set_repeating :
-                String repeatTime = tvRepeating.getText().toString().trim();
-                String repeatMessage = etRepeating.getText().toString().trim();
-                alarmReceiver.setRepeatingAlarm(
-                        this,
-                        AlarmReceiver.TYPE_REPEATING,
-                        repeatTime,
-                        repeatMessage);
+                String repeatTime = tvRepeating.getText().toString();
+                String repeatMessage = etRepeating.getText().toString();
+                alarmReceiver.setRepeatingAlarm(this, AlarmReceiver.TYPE_REPEATING,
+                        repeatTime, repeatMessage);
                 break;
 
             case R.id.btn_cancel :
@@ -121,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvOnceTime.setText(dateFormat.format(calendar.getTime()));
 
                 break;
-            case TIME_PICKER_REPEAT_TAG :
+            case TIME_PICKER_REPEAT_TAG:
                 tvRepeating.setText(dateFormat.format(calendar.getTime()));
                 break;
 
