@@ -28,7 +28,6 @@ import java.util.ArrayList;
  */
 public class FollowingFragment extends Fragment {
 
-    private ProgressDialog progressDialog;
 
     private FollowingAdapter followingAdapter;
     private RecyclerView recyclerView;
@@ -53,9 +52,7 @@ public class FollowingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_following, container, false);
-        // Inflate the layout for this fragment
-        return view;
+        return inflater.inflate(R.layout.fragment_following, container, false);
     }
 
     @Override
@@ -74,9 +71,6 @@ public class FollowingFragment extends Fragment {
 
        String username = getArguments().getString(ARG_NAME);
 
-        progressDialog = new ProgressDialog(getActivity());
-
-        progressDialog();
         followingViewModel.setFollowing(getActivity(), username);
 
         followingViewModel.getUserFollowingList().observe(getActivity(), new Observer<ArrayList<UserFollowing>>() {
@@ -84,17 +78,12 @@ public class FollowingFragment extends Fragment {
             public void onChanged(ArrayList<UserFollowing> userFollowings) {
                 if(userFollowings != null) {
                     followingAdapter.setData(userFollowings);
-                    progressDialog.dismiss();
                 }
             }
         });
     }
 
-    private void progressDialog() {
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-    }
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

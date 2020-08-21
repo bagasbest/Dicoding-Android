@@ -31,7 +31,7 @@ public class FollowingViewModel extends ViewModel {
             final String url = "https://api.github.com/users/"+ username + "/following";
 
             AsyncHttpClient client = new AsyncHttpClient();
-            client.addHeader("Authorization", "token 2136e1a95f0ac825da57c8ef353019cdf2482f5e");
+            client.addHeader("Authorization", "token 26a65ff9842fb2bda5a6473b1e52f873e9086339");
             client.addHeader("User-Agent", "request");
             client.get(url, new AsyncHttpResponseHandler() {
                 @Override

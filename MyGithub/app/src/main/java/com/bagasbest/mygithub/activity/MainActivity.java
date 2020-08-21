@@ -1,16 +1,17 @@
 package com.bagasbest.mygithub.activity;
 
-import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -30,8 +31,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressDialog progressDialog;
-
+    ProgressBar progressBar;
     UserAdapter userAdapter;
     RecyclerView recyclerView;
     MainViewModel mainViewModel;
@@ -55,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
         emptyIv.setVisibility(View.VISIBLE);
         emptyTv.setVisibility(View.VISIBLE);
 
+        progressBar = findViewById(R.id.progressBar);
+
+
+
         mainViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MainViewModel.class);
 
         recyclerView = findViewById(R.id.rvListUser);
@@ -63,36 +67,32 @@ public class MainActivity extends AppCompatActivity {
         userAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(userAdapter);
 
-        progressDialog = new ProgressDialog(this);
+
 
         mainViewModel.getUserList().observe(this, new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
 
+                userAdapter.setData(users);
 
-                if(users != null) {
+                if(users.size() != 0) {
                     emptyIv.setVisibility(View.GONE);
                     emptyTv.setVisibility(View.GONE);
-                    userAdapter.setData(users);
-                    progressDialog.dismiss();
                 }
 
                 else {
-                    //tidak muncul image dan teks, padahal sudah visible
                     emptyIv.setVisibility(View.VISIBLE);
                     emptyTv.setVisibility(View.VISIBLE);
                 }
+
+                showLoader(false);
             }
         });
 
 
     }
 
-    private void progressDialog() {
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,18 +111,14 @@ public class MainActivity extends AppCompatActivity {
 
                     if(!TextUtils.isEmpty(query.trim())) {
                         //searchView tidak kosong
-                        progressDialog();
-                        mainViewModel.setUserList(query,MainActivity.this);
+                        showLoader(true);
+                        mainViewModel.setUserList(query);
                     }
-                    return false;
+                    return true;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String query) {
-
-//                    if (!TextUtils.isEmpty(query.trim())) {
-//                        mainViewModel.setUserList(query);
-//                    }
                     return false;
                 }
             });
@@ -139,8 +135,21 @@ public class MainActivity extends AppCompatActivity {
             //menuju about activity
             startActivity(new Intent(this, AboutActivity.class));
         }
+
+        else if(id  == R.id.action_change_settings){
+            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void showLoader(boolean b) {
+        if(b) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 
 }

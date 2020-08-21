@@ -20,6 +20,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import cz.msebera.android.httpclient.Header;
 
 public class DetailActivity extends AppCompatActivity {
@@ -27,16 +29,25 @@ public class DetailActivity extends AppCompatActivity {
     private static final String TAG = DetailActivity.class.getSimpleName();
 
     ImageView img;
-    TextView tvNama, usernameTv, tvId, tvOrganization, tvRepo, tvBio;
+    TextView tvNama;
+    TextView usernameTv;
+    TextView tvId;
+    TextView tvOrganization;
+    TextView tvRepo;
+    TextView tvBio;
 
     public static final String EXTRA_NAME = "login";
     public static final String EXTRA_ID = "id";
     public static final String EXTRA_IMAGE = "avatar_url";
 
-    private ProgressDialog progressDialog;
 
-    String nama,organization, image, username, bio;
-    int repo, id;
+    String nama;
+    String organization;
+    String image;
+    String username;
+    String bio;
+    int repo;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +62,6 @@ public class DetailActivity extends AppCompatActivity {
         tvRepo = findViewById(R.id.publicRepo);
         tvBio = findViewById(R.id.bio);
 
-        progressDialog = new ProgressDialog(this);
 
         setUserDetail();
 
@@ -63,7 +73,8 @@ public class DetailActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-        getSupportActionBar().setElevation(0);
+
+        Objects.requireNonNull(getSupportActionBar()).setElevation(0);
 
 
 
@@ -71,7 +82,6 @@ public class DetailActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void setUserDetail() {
-        progressDialog();
 
         username = getIntent().getStringExtra(EXTRA_NAME);
         id = getIntent().getIntExtra(EXTRA_ID, 0);
@@ -79,12 +89,14 @@ public class DetailActivity extends AppCompatActivity {
 
         usernameTv.setText(" aka " + username);
         tvId.setText(String.valueOf(id));
-        try {
-            Glide.with(this).load(image)
-                    .placeholder(R.drawable.ic_face_black_24dp).into(img);
-        }catch (Exception e) {
-            e.getMessage();
-        }
+
+
+        Glide.with(this)
+                .load(image)
+                .error(R.drawable.ic_face_black_24dp)
+                .placeholder(R.drawable.ic_face_black_24dp)
+                .into(img);
+
 
         setValues();
 
@@ -96,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
         final String url = "https://api.github.com/users/" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token 2136e1a95f0ac825da57c8ef353019cdf2482f5e");
+        client.addHeader("Authorization", "token 26a65ff9842fb2bda5a6473b1e52f873e9086339");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -115,21 +127,16 @@ public class DetailActivity extends AppCompatActivity {
 
                     setValueAttribute();
 
-                progressDialog.dismiss();
 
                 }catch (Exception e){
-                    progressDialog.dismiss();
-                    Toast.makeText(DetailActivity.this, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("Exception: ", e.getMessage());
+                    e.printStackTrace();
                 }
 
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                progressDialog.dismiss();
-                Toast.makeText(DetailActivity.this, "Exception: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("onFailure: ", error.getMessage());
+                error.printStackTrace();
             }
         });
     }
@@ -161,9 +168,5 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    private void progressDialog() {
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-    }
+
 }

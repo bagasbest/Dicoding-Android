@@ -1,9 +1,9 @@
 package com.bagasbest.mygithub.viewmodel;
 
 
-import android.content.Context;
+
 import android.util.Log;
-import android.widget.Toast;
+
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -27,7 +27,7 @@ public class MainViewModel extends ViewModel {
     private static final String TAG = MainViewModel.class.getSimpleName();
 
 
-    public void setUserList(String username, final Context context) {
+    public void setUserList(String username) {
 
         //request API
         final ArrayList<User> userArrayList = new ArrayList<>();
@@ -35,7 +35,7 @@ public class MainViewModel extends ViewModel {
         final String url = "https://api.github.com/search/users?q=" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token 2136e1a95f0ac825da57c8ef353019cdf2482f5e");
+        client.addHeader("Authorization", "token 26a65ff9842fb2bda5a6473b1e52f873e9086339");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -62,17 +62,13 @@ public class MainViewModel extends ViewModel {
                     listUser.postValue(userArrayList);
 
                 } catch (JSONException e) {
-                    Toast.makeText(context, "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("Exception: ", e.getMessage());
+                    e.printStackTrace();
                 }
-
-
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(context, "onFailure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("onFailure: ", error.getMessage());
+                error.printStackTrace();
             }
         });
     }

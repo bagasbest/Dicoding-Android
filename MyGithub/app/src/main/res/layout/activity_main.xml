@@ -8,6 +8,16 @@
     android:background="#FDF3F3"
     tools:context=".activity.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyle"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVerticalProgressBar"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListUser"
         android:layout_width="match_parent"
@@ -28,6 +38,13 @@
         app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerticalProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVerticalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,13 +55,13 @@
         android:id="@+id/emptyIv"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:tint="@color/colorPrimary"
         android:src="@drawable/ic_speaker_notes_off_black_24dp"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         tools:ignore="MissingConstraints"
         android:visibility="gone"
-        android:contentDescription="@string/image" />
+        android:contentDescription="@string/image"
+        app:tint="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/emptyTv"

@@ -13,15 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+
 
 import com.bagasbest.mygithub.R;
 import com.bumptech.glide.Glide;
 
+
 public class AboutActivity extends AppCompatActivity {
 
-    ImageView imageIv, ig, linkedin;
-    TextView keteranganTv, quoteTv, myQuoteTv, contactTv, mediaTv;
+    ImageView imageIv;
+    ImageView ig;
+    ImageView linkedIn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +33,9 @@ public class AboutActivity extends AppCompatActivity {
 
         imageIv = findViewById(R.id.imageIv);
         ig = findViewById(R.id.ig);
-        linkedin = findViewById(R.id.linkedIn);
+        linkedIn = findViewById(R.id.linkedIn);
 
-        keteranganTv = findViewById(R.id.keteranganTv);
-        quoteTv = findViewById(R.id.quote);
-        myQuoteTv = findViewById(R.id.myQuote);
-        contactTv = findViewById(R.id.contact);
-        mediaTv = findViewById(R.id.media);
 
-        setLocalization();
 
         setImageView();
 
@@ -48,32 +45,25 @@ public class AboutActivity extends AppCompatActivity {
     private void setImageView() {
         String profil = "https://avatars0.githubusercontent.com/u/45277197?v=4";
         String instagram = "https://cdn.icon-icons.com/icons2/1584/PNG/512/3721672-instagram_108066.png";
-        String linkedIn = "https://image.flaticon.com/icons/png/512/174/174857.png";
+        String linkedin = "https://image.flaticon.com/icons/png/512/174/174857.png";
 
-        try {
-            Glide.with(this).load(profil).
-                    placeholder(R.drawable.ic_face_black_24dp).into(imageIv);
-        } catch (Exception e){
-            imageIv.setImageResource(R.drawable.ic_face_black_24dp);
-        }
+        Glide.with(this)
+                .load(profil)
+                .error(R.drawable.ic_face_black_24dp)
+                .placeholder(R.drawable.ic_face_black_24dp)
+                .into(imageIv);
 
+        Glide.with(this)
+                .load(instagram)
+                .error(R.drawable.ic_face_black_24dp)
+                .placeholder(R.drawable.ic_face_black_24dp)
+                .into(ig);
 
-
-        try {
-            Glide.with(this).load(instagram)
-                    .placeholder(R.drawable.ic_face_black_24dp).into(ig);
-        }catch (Exception e){
-            ig.setImageResource(R.drawable.ic_face_black_24dp);
-        }
-
-
-
-        try {
-            Glide.with(this).load(linkedIn)
-                    .placeholder(R.drawable.ic_face_black_24dp).into(linkedin);
-        }catch (Exception e){
-            linkedin.setImageResource(R.drawable.ic_face_black_24dp);
-        }
+        Glide.with(this)
+                .load(linkedin)
+                .error(R.drawable.ic_face_black_24dp)
+                .placeholder(R.drawable.ic_face_black_24dp)
+                .into(linkedIn);
     }
 
     @Override
@@ -137,21 +127,6 @@ public class AboutActivity extends AppCompatActivity {
         androidx.appcompat.app.AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
-
-    private void setLocalization() {
-        String keterangan = getResources().getString(R.string.keterangan);
-        keteranganTv.setText(keterangan);
-        String quote = getResources().getString(R.string.myquote);
-        quoteTv.setText(quote);
-        String myQuote = getResources().getString(R.string.jangan_pernah_berhenti_untuk_belajar);
-        myQuoteTv.setText(myQuote);
-        String contect = getResources().getString(R.string.kontak);
-        contactTv.setText(contect);
-        String media = getResources().getString(R.string.media_sosial_saya);
-        mediaTv.setText(media);
-    }
-
 
 
 }
